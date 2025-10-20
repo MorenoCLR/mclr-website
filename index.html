@@ -132,25 +132,62 @@
 
     /* Projects grid */
     .grid {
-      display: grid; gap: 18px; grid-template-columns: repeat(12, 1fr);
+      display: grid; gap: 18px; grid-template-columns: repeat(12, 1fr); 
     }
+    .card-link {
+      grid-column: span 4; /* move this from .card to here */
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border-radius: 16px;
+    }
+
+    .card-link:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
     .card {
-      grid-column: span 4;
       background: var(--panel);
       border: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
-      border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 12px;
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       transition: transform .2s ease, box-shadow .2s ease;
     }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.25); }
-    .thumb { height: 160px; border-radius: 12px; background: linear-gradient(135deg, #1d1f29, #12131a); display: grid; place-items: center; color: #bfc3d4; font-weight: 600; }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+    }
+    .thumb {
+      height: 160px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1d1f29, #12131a);
+      display: flex;               /* change from grid to flex for better image control */
+      justify-content: center;     /* horizontally center the image */
+      align-items: center;         /* vertically center the image */
+      overflow: hidden;            /* clip corners properly */
+    }
+
+    .thumb img {
+      max-width: 80%;
+      max-height: 80%;
+      height: auto;                /* preserve natural aspect ratio */
+      width: auto;                 /* ensures image doesn't stretch */
+      object-fit: contain;         /* keeps the whole image visible */
+      border-radius: 12px;
+    }
     .meta { display: flex; gap: 10px; flex-wrap: wrap; }
     .tag { font-size: 12px; padding: 6px 10px; border-radius: 999px; color: var(--muted); background: color-mix(in srgb, var(--text) 6%, transparent); border: 1px solid color-mix(in srgb, var(--text) 10%, transparent); }
     .card h3 { margin: 6px 0 4px; font-size: 18px; letter-spacing: -0.01em; }
     .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
-    @media (max-width: 1000px) { .card { grid-column: span 6; } }
-    @media (max-width: 640px) { .card { grid-column: span 12; } }
-
+    @media (max-width: 1000px) { .card-link { grid-column: span 6; } }
+    @media (max-width: 640px) { .card-link { grid-column: span 12; } }
+    
     /* About / Contact */
     .about {
       display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;
@@ -167,7 +204,7 @@
   <a class="sr-only" href="#main">Skip to content</a>
   <header>
     <div class="nav" role="navigation" aria-label="Primary">
-      <div class="brand"><a href="#top" aria-label="Home">morenoclr</a></div>
+      <div class="brand"><a href="#top" aria-label="Home">MorenoCLR</a></div>
       <nav>
         <a href="#work">Work</a>
         <a href="#about">About</a>
@@ -180,8 +217,10 @@
     <section class="hero" id="top" aria-label="Intro">
       <div>
         <div class="kicker">Portfolio</div>
-        <h1>Crafting calm, premium web experiences.</h1>
-        <p class="sub">I build clean, performant interfaces with a focus on clarity and detail. Inspired by products that feel effortless and thoughtful.</p>
+        <h1>Curiosity meets impact.</h1>
+        <p class="sub">
+          As a Computer Science student at Telkom University, I’m passionate about applying analytical thinking and creativity to solve challenges, whether through tech projects, organizational work, or brand storytelling.
+        </p>
         <div class="cta-row">
           <a class="btn primary" href="#work">See my work</a>
           <a class="btn ghost" href="#contact">Get in touch</a>
@@ -190,45 +229,7 @@
       <div class="showcase" aria-hidden="true">
         <div class="orb"></div>
         <div class="orb two"></div>
-        <div class="image"><img src="images/Screenshot_20250930_180027.png" alt="Project screenshot" style="width:100%; border-radius:16px;"></div>
-      </div>
-    </section>
-
-    <section id="work" aria-label="Selected work">
-      <h2 class="section-title">Selected Work</h2>
-      <p class="muted">A few projects that balance utility and elegance.</p>
-      <div class="grid" style="margin-top: 18px;">
-        <article class="card" aria-label="Project 1">
-          <div class="thumb">Project visual</div>
-          <h3>Serenity Commerce</h3>
-          <p>Modern storefront with snappy browsing, crisp typography, and meaningful motion.
-          </p>
-          <div class="meta">
-            <span class="tag">Frontend</span>
-            <span class="tag">Performance</span>
-            <span class="tag">Accessibility</span>
-          </div>
-        </article>
-        <article class="card" aria-label="Project 2">
-          <div class="thumb">Project visual</div>
-          <h3>Atlas Dashboard</h3>
-          <p>Executive analytics with focus on information density, not clutter.</p>
-          <div class="meta">
-            <span class="tag">Design System</span>
-            <span class="tag">Data Viz</span>
-            <span class="tag">Dark Mode</span>
-          </div>
-        </article>
-        <article class="card" aria-label="Project 3">
-          <div class="thumb">Project visual</div>
-          <h3>Quiet Notes</h3>
-          <p>Distraction‑free editor that respects your thoughts and your eyes.</p>
-          <div class="meta">
-            <span class="tag">Editor</span>
-            <span class="tag">Offline</span>
-            <span class="tag">PWA</span>
-          </div>
-        </article>
+        <div class="image"><img src="images/NONFORMAL_MORENO CELLO RHYTHM.png" alt="Project screenshot" style="width:100%; border-radius:16px;"></div>
       </div>
     </section>
 
@@ -237,17 +238,91 @@
       <div class="about">
         <div class="panel">
           <h3 style="margin-top:0">Who I am</h3>
-          <p>I am <strong>morenoclr</strong>, a developer who values precision and calm design. I enjoy shipping interfaces that feel fast and obvious, with strong attention to detail.</p>
-          <p>Skills focus: semantic HTML, responsive layout, typography, and accessible components.</p>
+          <p>I’m <strong>Moreno Cello Rhythm</strong>, an Informatics undergraduate student at Telkom University with a passion for technology, organization, and meaningful impact. Currently a member of AIESEC in Bandung’s Brand Marketing team, I explore how structure and creativity can work hand in hand to create positive change.</p>
+          <p>Focus areas: analytical problem-solving, project management, marketing strategy, and continuous learning.</p>
         </div>
         <div class="panel">
           <h3 style="margin-top:0">How I work</h3>
           <ul>
-            <li>Start with purpose and constraints.</li>
-            <li>Design in the browser to honor real content and devices.</li>
-            <li>Prioritize performance and accessibility from day one.</li>
+            <li>Start with clear goals and structured planning.</li>
+            <li>Approach problems analytically while staying open to creativity.</li>
+            <li>Value teamwork, communication, and consistent improvement.</li>
+            <li>Break complex challenges into clear, actionable steps.</li>
+            <li>Stay detail-oriented; every line, layout, and message has a purpose.</li>
+            <li>Learn continuously through feedback and reflection.</li>
+            <li>Balance logic and empathy in code, design, and collaboration.</li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <section id="work" aria-label="Selected work">
+      <h2 class="section-title">Selected Work</h2>
+      <p class="muted">A few projects that balance utility and elegance.</p>
+      <div class="grid" style="margin-top: 18px;">
+        <a href="https://github.com/morenoclr/Dark-UI" class="card-link" target="_blank" rel="noopener">
+          <article class="card" aria-label="Dark UI Project">
+            <div class="thumb">
+              <img src="images/Dark-UI.png" alt="Dark UI preview" />
+            </div>
+            <h3>Dark UI</h3>
+            <p>Dark UI is a W.I.P mod that replaces the game GUI. A Hearts Of Iron IV Mod.</p>
+            <div class="meta">
+              <span class="tag">Game UI Design</span>
+              <span class="tag">Mod Development</span>
+              <span class="tag">Hearts of Iron IV</span>
+            </div>
+          </article>
+        </a>
+        <a href="https://github.com/morenoclr/Dark-UI" class="card-link" target="_blank" rel="noopener">
+          <article class="card" aria-label="Dark UI Project">
+            <div class="thumb">
+              <img src="images/Dark-UI.png" alt="Dark UI preview" />
+            </div>
+            <h3>Dark UI</h3>
+            <p>Dark UI is a W.I.P mod that replaces the game GUI. A Hearts Of Iron IV Mod.</p>
+            <div class="meta">
+              <span class="tag">Game UI Design</span>
+              <span class="tag">Mod Development</span>
+              <span class="tag">Hearts of Iron IV</span>
+            </div>
+          </article>
+        </a>
+        <a href="https://github.com/morenoclr/Dark-UI" class="card-link" target="_blank" rel="noopener">
+          <article class="card" aria-label="Dark UI Project">
+            <div class="thumb">
+              <img src="images/Dark-UI.png" alt="Dark UI preview" />
+            </div>
+            <h3>Dark UI</h3>
+            <p>Dark UI is a W.I.P mod that replaces the game GUI. A Hearts Of Iron IV Mod.</p>
+            <div class="meta">
+              <span class="tag">Game UI Design</span>
+              <span class="tag">Mod Development</span>
+              <span class="tag">Hearts of Iron IV</span>
+            </div>
+          </article>
+        </a>
+      </div>
+    </section>
+
+    <section id="organization" aria-label="Organization">
+      <h2 class="section-title">Organization</h2>
+      <p class="muted">Organization that I am in</p>
+      <div class="grid" style="margin-top: 18px;">
+        <a href="https://github.com/morenoclr/Dark-UI" class="card-link" target="_blank" rel="noopener">
+          <article class="card" aria-label="Dark UI Project">
+            <div class="thumb">
+              <img src="images/AIESEC.jpg" alt="Dark UI preview" />
+            </div>
+            <h3>AIESEC in Bandung</h3>
+            <p>Dark UI is a W.I.P mod that replaces the game GUI. A Hearts Of Iron IV Mod.</p>
+            <div class="meta">
+              <span class="tag">Game UI Design</span>
+              <span class="tag">Mod Development</span>
+              <span class="tag">Hearts of Iron IV</span>
+            </div>
+          </article>
+        </a>
       </div>
     </section>
 
@@ -257,14 +332,13 @@
       <div class="about" style="margin-top: 12px;">
         <div class="panel">
           <h3 style="margin-top:0">Email</h3>
-          <p><a href="mailto:hello@morenoclr.dev">hello@morenoclr.dev</a></p>
+          <p><a href="mailto:hello@morenoclr.dev">contact@morenoclr.com</a></p>
         </div>
         <div class="panel">
           <h3 style="margin-top:0">Links</h3>
           <ul>
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Dribbble</a></li>
+            <li><a href="https://github.com/MorenoCLR">GitHub</a></li>
+            <li><a href="www.linkedin.com/in/morenoclr">LinkedIn</a></li>
           </ul>
         </div>
       </div>
